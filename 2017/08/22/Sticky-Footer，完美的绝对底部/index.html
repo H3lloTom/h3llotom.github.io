@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Sticky Footer，完美的绝对底部 | neptune</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="写在前面做过网页开发的同学想必都遇到过这样尴尬的排版问题：在主体内容不足够多或者未完全加载出来之前，就会导致出现（图一）的这种情况，原因是因为没有足够的垂直空间使得页脚推到浏览器窗口最底部。但是，我们期望的效果是页脚应该一直处于页面最底部（如图二）：笔者最近在项目中也遇到过这样的场景，在寻找最佳解决方案的过程中，了解到了 “Sticky Footer” 这个名词。本文将带大家重新认识这个常见的网页">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sticky Footer，完美的绝对底部">
+<meta property="og:url" content="http://yoursite.com/2017/08/22/Sticky-Footer，完美的绝对底部/index.html">
+<meta property="og:site_name" content="neptune">
+<meta property="og:description" content="写在前面做过网页开发的同学想必都遇到过这样尴尬的排版问题：在主体内容不足够多或者未完全加载出来之前，就会导致出现（图一）的这种情况，原因是因为没有足够的垂直空间使得页脚推到浏览器窗口最底部。但是，我们期望的效果是页脚应该一直处于页面最底部（如图二）：笔者最近在项目中也遇到过这样的场景，在寻找最佳解决方案的过程中，了解到了 “Sticky Footer” 这个名词。本文将带大家重新认识这个常见的网页">
+<meta property="og:image" content="https://misc.aotu.io/liqinuo/sticky_01.png">
+<meta property="og:image" content="https://misc.aotu.io/liqinuo/sticky_02.png">
+<meta property="og:updated_time" content="2018-01-29T06:34:09.424Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sticky Footer，完美的绝对底部">
+<meta name="twitter:description" content="写在前面做过网页开发的同学想必都遇到过这样尴尬的排版问题：在主体内容不足够多或者未完全加载出来之前，就会导致出现（图一）的这种情况，原因是因为没有足够的垂直空间使得页脚推到浏览器窗口最底部。但是，我们期望的效果是页脚应该一直处于页面最底部（如图二）：笔者最近在项目中也遇到过这样的场景，在寻找最佳解决方案的过程中，了解到了 “Sticky Footer” 这个名词。本文将带大家重新认识这个常见的网页">
+<meta name="twitter:image" content="https://misc.aotu.io/liqinuo/sticky_01.png">
+  
+    <link rel="alternate" href="/atom.xml" title="neptune" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">neptune</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Sticky-Footer，完美的绝对底部" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/22/Sticky-Footer，完美的绝对底部/" class="article-date">
+  <time datetime="2017-08-22T11:02:10.000Z" itemprop="datePublished">2017-08-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Sticky Footer，完美的绝对底部
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>做过网页开发的同学想必都遇到过这样尴尬的排版问题：<br>在主体内容不足够多或者未完全加载出来之前，就会导致出现（图一）的这种情况，原因是因为没有足够的垂直空间使得页脚推到浏览器窗口最底部。但是，我们期望的效果是页脚应该一直处于页面最底部（如图二）：<br><img src="https://misc.aotu.io/liqinuo/sticky_01.png" alt="enter description here"><br>笔者最近在项目中也遇到过这样的场景，在寻找最佳解决方案的过程中，了解到了 “Sticky Footer” 这个名词。<br>本文将带大家重新认识这个常见的网页效果，以及一些可行的实现方案。</p>
+<h2 id="什么是-“Sticky-Footer”"><a href="#什么是-“Sticky-Footer”" class="headerlink" title="什么是 “Sticky Footer”"></a>什么是 “Sticky Footer”</h2><p>所谓 “Sticky Footer”，并不是什么新的前端概念和技术，它指的就是一种网页效果：<br>如果页面内容不足够长时，页脚固定在浏览器窗口的底部；如果内容足够长时，页脚固定在页面的最底部。<br><strong>总而言之，就是页脚一直处于最底</strong>，效果大致如图所示：<br><img src="https://misc.aotu.io/liqinuo/sticky_02.png" alt="enter description here"><br>当然，实现这种效果的方法有很多种，其中有通过脚本计算的，有通过 CSS 处理的，脚本计算的方案我们不在本文探讨。<br>下面我们看看有哪些通过 CSS 可以实现且适用于移动端开发的方案，并分析其中的利弊。</p>
+<h2 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h2><p>假设我们页面的 HTML 结构是这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;content&quot;&gt;&lt;!-- 页面主体内容区域 --&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;footer&quot;&gt;&lt;!-- 需要做到 Sticky Footer 效果的页脚 --&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="实现方案一：absolute"><a href="#实现方案一：absolute" class="headerlink" title="实现方案一：absolute"></a>实现方案一：absolute</h3><p>通过绝对定位处理应该是常见的方案，只要使得页脚一直定位在主容器预留占位位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">html, body &#123;</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.wrapper &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    min-height: 100%;</span><br><span class="line">    padding-bottom: 50px;</span><br><span class="line">    box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line">.footer &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    bottom: 0;</span><br><span class="line">    height: 50px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个方案需指定 html、body 100% 的高度，且 content 的 padding-bottom 需要与 footer 的 height 一致。</p>
+<h3 id="实现方案二：calc"><a href="#实现方案二：calc" class="headerlink" title="实现方案二：calc"></a>实现方案二：calc</h3><p>通过计算函数 calc 计算（视窗高度 - 页脚高度）赋予内容区最小高度，不需要任何额外样式处理，代码量最少、最简单。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.content &#123;</span><br><span class="line">    min-height: calc(100vh - 50px);</span><br><span class="line">&#125;</span><br><span class="line">.footer &#123;</span><br><span class="line">    height: 50px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果不需考虑 ==calc()== 以及 ==vh== 单位的兼容情况，这是个很理想的实现方案。<br>同样的问题是 footer 的高度值需要与 content 其中的计算值一致。</p>
+<h3 id="实现方案三：table"><a href="#实现方案三：table" class="headerlink" title="实现方案三：table"></a>实现方案三：table</h3><p>通过 table 属性使得页面以表格的形态呈现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">html, body &#123;</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.wrapper &#123;</span><br><span class="line">    display: table;</span><br><span class="line">    width: 100%;</span><br><span class="line">    min-height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.content &#123;</span><br><span class="line">    display: table-row;</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，使用 table 方案存在一个比较常见的样式限制，通常 margin、padding、border 等属性会不符合预期。<br>笔者不建议使用这个方案。当然，问题也是可以解决的：别把其他样式写在 table 上。</p>
+<h3 id="实现方案四：Flexbox"><a href="#实现方案四：Flexbox" class="headerlink" title="实现方案四：Flexbox"></a>实现方案四：Flexbox</h3><p>Flexbox 是非常适合实现这种效果的，使用 Flexbox 实现不仅不需要任何额外的元素，而且允许页脚的高度是可变的。</p>
+<p>虽然大多数 Flexbox 布局常用于水平方向布局，但别忘了实际上它也可用于垂直布局，所以你需要做的是将垂直部分包装在一个 Flex 容器中，并选择要扩展的部分，他们将自动占用其容器中的所有可用空间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">html &#123;</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">body &#123;</span><br><span class="line">    min-height: 100%;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-direction: column;</span><br><span class="line">&#125;</span><br><span class="line">.content &#123;</span><br><span class="line">    flex: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是想要兼容各种系统设备，需要兼顾 ==flex== 的兼容写法。</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>以上几种实现方案，笔者都在项目中尝试过，每个实现的方法其实大同小异，同时也都有自己的利弊。<br>其中有的方案存在限制性问题，需要固定页脚高度；其中有的方案需要添加额外的元素或者需要 Hack 手段。同学们可以根据页面具体需求，选择最适合的方案。</p>
+<p>当然，技术是不断更新的，也许还有很多不同的、更好的方案。但相信大家最终目都是一样的，为了更好的用户体验！<br>参考资料：<br><a href="https://css-tricks.com/couple-takes-sticky-footer/" target="_blank" rel="noopener">https://css-tricks.com/couple-takes-sticky-footer/</a><br><a href="http://www.w3cplus.com/css3/css-secrets/sticky-footers.html" target="_blank" rel="noopener">http://www.w3cplus.com/css3/css-secrets/sticky-footers.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/22/Sticky-Footer，完美的绝对底部/" data-id="cjdkda1w90001viuq1hl3pk62" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/03/静态资源添加版本号/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          静态资源添加版本号
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/21/caseManager/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">nodejs+express+vuejs实现小项目API优秀案例管理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser-javascript-html-css/">browser,javascript,html,css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6-module/">es6 module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp-js/">gulp.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css-echarts/">html,css,echarts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/newyear/">newyear</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs/">nodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/tags/browser-javascript-html-css/" style="font-size: 10px;">browser,javascript,html,css</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6-module/" style="font-size: 10px;">es6 module</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/gulp-js/" style="font-size: 10px;">gulp.js</a> <a href="/tags/html-css-echarts/" style="font-size: 10px;">html,css,echarts</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/newyear/" style="font-size: 10px;">newyear</a> <a href="/tags/nodeJs/" style="font-size: 10px;">nodeJs</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/12/newYear/">2018年计划</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/29/HTML-CSS布局技巧/">HTML布局小技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/24/浏览器工作原理/">浏览器工作原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/16/bootstrap-4-0-0/">webpack导入bootstrap&#39;</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/25/study/">近期学习摘要（持续更新中）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 neptune<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

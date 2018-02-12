@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>webpack导入bootstrap&#39; | neptune</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="==很久之前，刚接触node与npm的时候，就梦想着什么时候能用它来导入依赖库，由于之前也是实践经验比较少，所以这一块比较少地进行总结，今天按照webpack官方文档，实现了webpack导入bootstrap@4.0.0 beta2== 梳理思路首先，我们要知道bootstrap具体需要哪些文件，以及这些文件的依赖关系  样式文件：bootstrap.css 依赖文件：jquery（4.0.0版">
+<meta name="keywords" content="webpack,bootstrap,es6 module">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack导入bootstrap&#39;">
+<meta property="og:url" content="http://yoursite.com/2017/12/16/bootstrap-4-0-0/index.html">
+<meta property="og:site_name" content="neptune">
+<meta property="og:description" content="==很久之前，刚接触node与npm的时候，就梦想着什么时候能用它来导入依赖库，由于之前也是实践经验比较少，所以这一块比较少地进行总结，今天按照webpack官方文档，实现了webpack导入bootstrap@4.0.0 beta2== 梳理思路首先，我们要知道bootstrap具体需要哪些文件，以及这些文件的依赖关系  样式文件：bootstrap.css 依赖文件：jquery（4.0.0版">
+<meta property="og:updated_time" content="2018-01-29T06:34:09.424Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack导入bootstrap&#39;">
+<meta name="twitter:description" content="==很久之前，刚接触node与npm的时候，就梦想着什么时候能用它来导入依赖库，由于之前也是实践经验比较少，所以这一块比较少地进行总结，今天按照webpack官方文档，实现了webpack导入bootstrap@4.0.0 beta2== 梳理思路首先，我们要知道bootstrap具体需要哪些文件，以及这些文件的依赖关系  样式文件：bootstrap.css 依赖文件：jquery（4.0.0版">
+  
+    <link rel="alternate" href="/atom.xml" title="neptune" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">neptune</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-bootstrap-4-0-0" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/16/bootstrap-4-0-0/" class="article-date">
+  <time datetime="2017-12-15T18:18:17.000Z" itemprop="datePublished">2017-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      webpack导入bootstrap&#39;
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>==很久之前，刚接触node与npm的时候，就梦想着什么时候能用它来导入依赖库，由于之前也是实践经验比较少，所以这一块比较少地进行总结，今天按照webpack官方文档，实现了webpack导入bootstrap@4.0.0 beta2==</p>
+<h2 id="梳理思路"><a href="#梳理思路" class="headerlink" title="梳理思路"></a>梳理思路</h2><p>首先，我们要知道bootstrap具体需要哪些文件，以及这些文件的依赖关系</p>
+<ul>
+<li>样式文件：bootstrap.css</li>
+<li>依赖文件：jquery（4.0.0版本加入了popper）</li>
+<li>JS集成插件：bootstrap.js<h2 id="开始操作"><a href="#开始操作" class="headerlink" title="开始操作"></a>开始操作</h2>第一步，bootstrap.css很好导入，只要在entry内直接</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import <span class="string">'bootstrap/dist/css/bootstrap.css'</span></span><br></pre></td></tr></table></figure>
+<p>在webpack.config.js内配置 css-loader和 style-loader</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.css$/,</span><br><span class="line">        use: [</span><br><span class="line">          <span class="string">'style-loader'</span>,</span><br><span class="line">          <span class="string">'css-loader'</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p>第二步，导入依赖库</p>
+<p>webpack很人性化地提供了ProvidePlugin插件，用法如下：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">new webpack.ProvidePlugin(&#123;</span><br><span class="line">  identifier: <span class="string">'module1'</span>,</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">like this</span><br><span class="line"></span><br><span class="line">new webpack.ProvidePlugin(&#123;</span><br><span class="line">      $: <span class="string">'jquery'</span>,</span><br><span class="line">      jQuery: <span class="string">'jquery'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>webpack官方解释:<br>任何时候，当 identifier 被当作未赋值的变量时，module 就会自动被加载，并且 identifier 会被这个 module 输出的内容所赋值。（模块的 property 用于支持命名导出(named export)）。<br>就是你可以在任何地方都使用定义好的标识符$和jQuery.<br>有点像是requirejs里的shim用法，后者还是需要自定义好shim的依赖，相比之下webpack还是更加人性化的。<br>这里popper插件我使用npm install然后写在webpack中没有作用，看了bootstrap的GitHub issue后官方人员推荐使用dist/js/bootstrap.bundle.js文件，因为4.0以上的bundle已经将popper集成进去。</p>
+<p>第三步，引入bootstrap.bundle.js</p>
+<p>entry文件中</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import <span class="string">'bootstrap/dist/js/bootstrap.bundle.js'</span></span><br></pre></td></tr></table></figure>
+<h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><hr>
+<p>PS：这里不知道为什么bootstrap不把jquery库集成进来，不然的话让用户每次都要先导入jquery。bootstrap的集成JS插件其实也是jquery的extend插件，实在是搞不明白为什么不集成jquery进来…</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/16/bootstrap-4-0-0/" data-id="cjdkda1wm000bviuq76wwjpui" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6-module/">es6 module</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/24/浏览器工作原理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          浏览器工作原理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/25/study/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">近期学习摘要（持续更新中）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser-javascript-html-css/">browser,javascript,html,css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6-module/">es6 module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp-js/">gulp.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css-echarts/">html,css,echarts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/newyear/">newyear</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs/">nodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/tags/browser-javascript-html-css/" style="font-size: 10px;">browser,javascript,html,css</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6-module/" style="font-size: 10px;">es6 module</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/gulp-js/" style="font-size: 10px;">gulp.js</a> <a href="/tags/html-css-echarts/" style="font-size: 10px;">html,css,echarts</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/newyear/" style="font-size: 10px;">newyear</a> <a href="/tags/nodeJs/" style="font-size: 10px;">nodeJs</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/12/newYear/">2018年计划</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/29/HTML-CSS布局技巧/">HTML布局小技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/24/浏览器工作原理/">浏览器工作原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/16/bootstrap-4-0-0/">webpack导入bootstrap&#39;</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/25/study/">近期学习摘要（持续更新中）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 neptune<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

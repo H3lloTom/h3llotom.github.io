@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>浏览器工作原理 | neptune</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前端工作零零散散已经有了一年左右的时间了，上周参加一个前端开发者分享会，才发现其实大牛们不光光是在堆叠工作时长，所掌握的知识是真真切切的与工作时长成正比的，从今天开始，要开始结构化地梳理一下前端的专业知识了，不能是修修补补地完善知识，今天的话，先摘一篇前端必须要学的，浏览器工作原理吧。(纯手动翻译，若与原文有所冲突，自行选择高明的见解) 英文原文：How Browsers Work: Behin">
+<meta name="keywords" content="browser,javascript,html,css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器工作原理">
+<meta property="og:url" content="http://yoursite.com/2017/12/24/浏览器工作原理/index.html">
+<meta property="og:site_name" content="neptune">
+<meta property="og:description" content="前端工作零零散散已经有了一年左右的时间了，上周参加一个前端开发者分享会，才发现其实大牛们不光光是在堆叠工作时长，所掌握的知识是真真切切的与工作时长成正比的，从今天开始，要开始结构化地梳理一下前端的专业知识了，不能是修修补补地完善知识，今天的话，先摘一篇前端必须要学的，浏览器工作原理吧。(纯手动翻译，若与原文有所冲突，自行选择高明的见解) 英文原文：How Browsers Work: Behin">
+<meta property="og:image" content="http://yoursite.com/2017/12/24/浏览器工作原理/images/1509982583142.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/12/24/浏览器工作原理/images/1509982583143.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/12/24/浏览器工作原理/images/1509982583143_1.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/12/24/浏览器工作原理/images/image008_1.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/12/24/浏览器工作原理/images/image009.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/24/浏览器工作原理/images/image011.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/24/浏览器工作原理/images/image013.png">
+<meta property="og:updated_time" content="2018-01-29T06:34:09.425Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器工作原理">
+<meta name="twitter:description" content="前端工作零零散散已经有了一年左右的时间了，上周参加一个前端开发者分享会，才发现其实大牛们不光光是在堆叠工作时长，所掌握的知识是真真切切的与工作时长成正比的，从今天开始，要开始结构化地梳理一下前端的专业知识了，不能是修修补补地完善知识，今天的话，先摘一篇前端必须要学的，浏览器工作原理吧。(纯手动翻译，若与原文有所冲突，自行选择高明的见解) 英文原文：How Browsers Work: Behin">
+<meta name="twitter:image" content="http://yoursite.com/2017/12/24/浏览器工作原理/images/1509982583142.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="neptune" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">neptune</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-浏览器工作原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/24/浏览器工作原理/" class="article-date">
+  <time datetime="2017-12-24T15:11:00.000Z" itemprop="datePublished">2017-12-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浏览器工作原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>前端工作零零散散已经有了一年左右的时间了，上周参加一个前端开发者分享会，才发现其实大牛们不光光是在堆叠工作时长，所掌握的知识是真真切切的与工作时长成正比的，从今天开始，要开始结构化地梳理一下前端的专业知识了，不能是修修补补地完善知识，今天的话，先摘一篇前端必须要学的，浏览器工作原理吧。(纯手动翻译，若与原文有所冲突，自行选择高明的见解)</p>
+<p>英文原文：<a href="http://www.html5rocks.com/en/tutorials/internals/howbrowserswork/" target="_blank" rel="noopener">How Browsers Work: Behind the Scenes of Modern Web Browsers</a></p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>浏览器可以被认为是使用最广泛的软件，本文将介绍浏览器的工作原理，我们将看到，从你在地址栏输入google.com到你看到google主页过程中都发生了什么。</p>
+<h3 id="将讨论的浏览器"><a href="#将讨论的浏览器" class="headerlink" title="将讨论的浏览器"></a>将讨论的浏览器</h3><p>今天，有五种主流浏览器——IE、Firefox、Safari、Chrome及Opera。<br>移动端，主要的浏览器有安卓浏览器，iPhone，Opera Mini和Opera Mobile，UC浏览器，诺基亚S40/S60和谷歌Chrome浏览器。除了Opera意外，都是基于Webkit的。我给出的例子将是基于开源的浏览器，例如火狐和谷歌，和Safari（部分开源），根据 <a href="http://gs.statcounter.com/" target="_blank" rel="noopener">StatCounter statistics</a> 统计，chrome，firefox和safari大约占领了71%的桌面端浏览器使用量。在移动端，安卓浏览器，iPhone和chrome大约占据了54%的使用量</p>
+<h3 id="浏览器的主要功能"><a href="#浏览器的主要功能" class="headerlink" title="浏览器的主要功能"></a>浏览器的主要功能</h3><p>浏览器的主要作用是展现你选择的web资源，通过向服务器请求并且展现在浏览器窗口上。这些资源往往是HTML文档，也有可能是PDF文件，图像，或者其他类型的内容。这些资源是以URI（Uniform Resource Identifier）统一资源标识符来特别指向的。</p>
+<p>浏览器来展示这些HTML文件的方式是用HTML和CSS样式的规则，这些规则主要是由==W3C==（World Wide Web Consortium）组织来制定的，这是一个制定web标准的组织。过去的数年来，浏览器都倾向于只遵守少量的规则并且发展出了各自的扩展定义，这样会对web开发人员造成严重的兼容性难题。今天，大多数的浏览器都基本上贴近于规则。</p>
+<p>浏览器界面大多都是大同小异，这些共同之处有：</p>
+<ul>
+<li>提供一个可以输入地址的横条</li>
+<li>返回和前进的按钮</li>
+<li>书签选项</li>
+<li>刷新和停止按钮以便于刷新或者是停止加载当前页面</li>
+<li>主页按钮可以让你去主页</li>
+</ul>
+<p>奇怪的是，浏览器的用户界面并没有以一种特定的规则制定，它是来自于这么多年来浏览器所做的比较好的经验和相互间的模仿。HTML5的标准并没有规定浏览器的UI必须是怎么样的，但是还是列举了一些常用的元素。这里面的就是地址栏，状态栏和工具栏。当然了，还有一些个性化的部分，例如Firefox的下载管理。</p>
+<h3 id="浏览器高级架构"><a href="#浏览器高级架构" class="headerlink" title="浏览器高级架构"></a>浏览器高级架构</h3><p>浏览器的主要组件有：</p>
+<ol>
+<li>用户界面：这里包括了地址栏，前进/后退按钮，书签菜单等等。除了页面场口外的每一部分。</li>
+<li>浏览器引擎：UI界面与渲染引擎之间的一些要处理的事件。</li>
+<li>渲染引擎：负责展示请求的内容，例如，请求的内容是HTML，渲染引擎就会解析HTML和CSS，然后将解析好的内容展示在屏幕上。</li>
+<li>网络部分：处理网络请求，例如HTTP请求，使用不同的实现手段用于不同的平台。</li>
+<li>UI后台：用来回执基础的小组件，例如级联框或是窗口，这个后台的实现接口不是单一平台特有的，而是开放式的系统接口。</li>
+<li>JavaScript解释器：用来解析并执行JavaScript代码。</li>
+<li>数据存储：这是一块持久的部分。浏览器或许需要在本地存储各种类型的数据，例如cookies。浏览器也支持一些存储形式，例如localStorage，IndexDB，WebSQL和文件系统。</li>
+<li><img src="./images/1509982583142.jpg" alt="enter description here" title="layers"></li>
+</ol>
+<p>需要说明的是有些浏览器，例如chrome运行多个渲染引擎：每个Tab标签页一个，每个标签页运行一个单独的进程。</p>
+<h2 id="渲染引擎"><a href="#渲染引擎" class="headerlink" title="渲染引擎"></a>渲染引擎</h2><p>渲染引擎的职责是……额，当然是渲染了，那就是将请求得到内容展示在浏览器上。<br>浏览器引擎能够默认的展现HTML与XML文档和图像，同样的，它还能够展现起亚类型的插件或是扩展，例如，它能够利用PDF视图插件来展示PDF文件，这一章节里，我们将关注于主要的部分：展现由CSS作为样式的HTML和图像。</p>
+<h3 id="渲染引擎们"><a href="#渲染引擎们" class="headerlink" title="渲染引擎们"></a>渲染引擎们</h3><p>不同的浏览器使用不同的渲染引擎：Internet Explorer使用的是Trident，Firefox使用的是Gecko，Safari使用的是Webkit，Chrome和Opera（从版本15开始）使用的是Blink，一种Webkit的分支。<br>Webkit是一款开源的渲染引擎，它最初是用于Linux上的一种引擎，然后被Apple公司修改成能够适用于Mac和Windows，看看更多的关于<a href="http://webkit.org/" target="_blank" rel="noopener">webkit</a></p>
+<h3 id="主要工作过程"><a href="#主要工作过程" class="headerlink" title="主要工作过程"></a>主要工作过程</h3><p>渲染引擎会开始接收从网络服务器上获取的内容，这通常会在8KB的空间内完成。<br>之后，浏览器的工作过程大致上如下：</p>
+<p><img src="./images/1509982583143.jpg" alt="enter description here" title="flow"></p>
+<p>渲染引擎开始解析HTML文档，并且将elements元素转化为一棵布满DOM节点的“内容树”。然后，引擎将会去解析样式数据，包括外联样式和内敛样式。样式描述和通常的结构属性在HTML里会被使用来创造另一棵树：渲染树<br>渲染树包括了很多矩形，这些矩形都带有一些常见的属性，例如：颜色和尺寸。这些矩形现在被要求显示在屏幕上。<br>渲染树完成之后，会经历一个“布局”的过程。这意味着，需要给每个节点一个精确的坐标来让它们展现在屏幕上。下一个阶段就是绘制，渲染树将会被展开，然后每个节点都会通过UI后台来绘制。<br>明白这样的一个渐进式过程是非常重要的。为了更好的用户体验，渲染引擎将会尽可能快的将内容展现在屏幕上。它不会去等待直到所有的HTML都被解析，然后再去构建、对渲染树做布局。内容的一部分将会被解析出来并且展示，同时，进程一直在持续不断地解析剩下的网络内容。</p>
+<h3 id="主要过程的例子"><a href="#主要过程的例子" class="headerlink" title="主要过程的例子"></a>主要过程的例子</h3><p><img src="./images/1509982583143_1.jpg" alt="enter description here" title="Figure 3 : WebKit main flow"></p>
+<p><img src="./images/image008_1.jpg" alt="enter description here" title="Figure 4 : Mozilla&#39;s Gecko rendering engine main flow"></p>
+<p>从上面的对比图中你能看到,虽然webkit和gecko叫法不太一样,但是流程基本上是一致的.<br>Gecko把格式化的元素树叫做”框架树”.每个节点是一个框架.Webkit把它称作”渲染树”,它是由许多”渲染对象”构成的.Webkit把安置元素成为”布局”,Gecko把它叫做”重排”.Webkit把连接各种节点和只做渲染树的信息叫做”依附关系”,一个值得一提的不同之处是,Gecko有额外的一层处于HTML与DOM树之间,它被叫做”内容墨水”,它是一个制造DOM元素的工厂,我们稍后会来谈一谈这部分的流程.</p>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>解析在渲染引擎内部是一个非常重要的过程,我们将要稍微深入地探讨一下,我们先简单介绍一下有关解析.<br>解析一份文档意味着把它翻译成我们能够使用的代码结构,解析的结果往往是一棵代表着文档结构的节点树,它一般被叫做解析树或是语法树.<br>例如,解析表达式2+3-1会返回这样一棵树:</p>
+<p><img src="./images/image009.png" alt="enter description here" title="Figure 5 : mathematical expression tree node"></p>
+<h3 id="解析概述"><a href="#解析概述" class="headerlink" title="解析概述"></a>解析概述</h3><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>解析是按照文档的语法规则:写入的语言或者是格式来决定.每一句你要解析的格式都必须按照既定的规则,叫做上下文语法关联.人类的语言不是这其中的一种,因此不能被解析为谈话式的语法.</p>
+<h4 id="解析-词法分析的组合"><a href="#解析-词法分析的组合" class="headerlink" title="解析-词法分析的组合"></a>解析-词法分析的组合</h4><p>解析可以被分成两个过程:词法分析和语法分析.<br>词法分析是一个将输入的内容转为特定的符号的过程.这些特定的符号是语言的词汇表:一些构建的集合.在人类于艳丽,可以看做是字典里的所有单词组合起来的一种集合.<br>语法分析是将这些语言的规则应用起来.<br>解析通常是将这两个工作分开:==词法==分析主要是将输入内容拆分成标识符,==语法==解析是作为构建语法树.词法分析能够将空格或是断行区分出来</p>
+<p><img src="./images/image011.png" alt="enter description here" title="Figure 6 : from source document to parse trees"><br>解析过程是迭代进行的.解析器往往会去向词法请求一个新的token,然后用现有的语法规则去匹配这个token.如果有一个规则被匹配到了,解析树上会增加一个节点,然后再去请求下一个token.<br>如果没有规则被匹配到,解析器会将token暂时存下来,然后会继续请求token知道有一条规则能够匹配存储下来的所有token,如果还是没有匹配的规则,那么解析器就会收集一个异常,这意味着文档不是有效运行的,有语法错误.</p>
+<h4 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h4><p>在许多情况下，解析树并不是最终的产品。解析只是做了翻译的一步：将输入文档转换为另一种格式。一个例子就是编译。编译器先将源码解析成一棵解析树，然后将这棵树翻译成机器语言。</p>
+<p><img src="./images/image013.png" alt="enter description here" title="Figure 7 : compilation flow"></p>
+<h4 id="解析的例子"><a href="#解析的例子" class="headerlink" title="解析的例子"></a>解析的例子</h4><p>在上面的图片中，我们构建了一棵简单的数学表达式解析树。让我们尝试着定义一个简单的计算语言，然后来看一下整个解析过程。<br>词汇：我们的语言包括证书，加法运算符和减法运算符<br>语法：</p>
+<ol>
+<li>语法规则包含表达式，关键字，和操作符</li>
+<li>语言能包括任何数字和表达式</li>
+<li>一个表达式被定义为一个数据项与操作符，然后再接着一个变量</li>
+<li>一个操作符是一个加法符或是一个减法符号</li>
+<li>一个数据项可以使一个数字或是另一个表达式</li>
+</ol>
+<p>让我们来分析输入==2+3-1==<br>第一个匹配的字符是==2==：根据第五条规则，这是一个项，第二个匹配到的是==2+3==：这符合第三条规则：一个数据项接着一个操作符再接着一个数据项。再下一条匹配到的是==2+3-1==是一个表达式，因为我们已经知道==2+3==是一个数据项，因此我们有一个数据项跟着一个操作符再跟着一个数据项。==2++==不会被匹配到任何规则，因此它不是一个有效输入。</p>
+<h4 id="通常的词法和语法定义"><a href="#通常的词法和语法定义" class="headerlink" title="通常的词法和语法定义"></a>通常的词法和语法定义</h4><p>通常的词法可以在这里查找到<a href="http://www.regular-expressions.info/" target="_blank" rel="noopener">regular expressions</a><br>举个栗子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INTEGER: 0|[1-9][0-9]*</span><br><span class="line">PLUS: +</span><br><span class="line">MINUS: -</span><br></pre></td></tr></table></figure>
+<p>正如你所见到的，数字是使用一个表达式定义的<br>语法通常是用一种叫做<a href="http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form" target="_blank" rel="noopener">BNF</a>的格式定义。我们的语言可以被定义为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expression :=  term  operation  term</span><br><span class="line">operation :=  PLUS | MINUS</span><br><span class="line">term := INTEGER | expression</span><br></pre></td></tr></table></figure>
+<p>一门语言能被解析为一个解析表达式，如果它的语法是context free grammar（个人理解为上下文自由语法）。要想更加深入了解这方面可以查看 <a href="http://en.wikipedia.org/wiki/Context-free_grammar" target="_blank" rel="noopener">Wikipedia’s article on Context-free grammar</a></p>
+<h4 id="解析器的类型"><a href="#解析器的类型" class="headerlink" title="解析器的类型"></a>解析器的类型</h4><p>有两种解析器：从上至下解析和从下至上解析。从上至下解析器就是从高级层阶上查找对应的语法规则。从下至上解析就是先将输入转化为词法规则，然后从低级规则往高级规则逐步查对应规则<br>让我们看看两种解析规则如何来解析我们的例子。<br>自顶向下的解析器将从更高级别的规则开始：它将识别2 + 3作为表达式。 然后识别2 + 3 - 1作为一个表达式（识别表达式的过程发展，匹配其他规则，但起点是最高级别的规则）。<br>自下而上的解析器将扫描输入，直到匹配规则。 然后它将用规则替换匹配的输入。 这将继续直到输入结束。 部分匹配的表达式放在解析器的堆栈上。<br>这种自下而上的解析器称为shift-reduce解析器，因为输入被移到右边（设想一个指针首先指向输入开始并向右移动）并逐渐减少到语法规则</p>
+<h4 id="自动生成解析器"><a href="#自动生成解析器" class="headerlink" title="自动生成解析器"></a>自动生成解析器</h4><p>有许多工具能够生成一个解析器。你只需要将你的语法规则填充进去-词法和语法规则，然后他们就会生成一个解析器。创造一个解析器需要有对解析过程有深层的理解，手动来创造一个解析器并不是一件容易的事，因此解析生成工具是非常有用的。<br>Webkit使用两个非常有名的解析生成器：Flex来创造词法分析器，Bison来创造一个解析器（你也许听说并使用过叫做Lex和Yacc），Flex输入是一个文件包含了许多常规的表达式。Bison的输入是一个BNF格式的语法规则库。</p>
+<h3 id="HTML解析器"><a href="#HTML解析器" class="headerlink" title="HTML解析器"></a>HTML解析器</h3><h4 id="HTML语法定义"><a href="#HTML语法定义" class="headerlink" title="HTML语法定义"></a>HTML语法定义</h4><h4 id="不是一个上下文无关语法"><a href="#不是一个上下文无关语法" class="headerlink" title="不是一个上下文无关语法"></a>不是一个上下文无关语法</h4><h4 id="HTML-DTD"><a href="#HTML-DTD" class="headerlink" title="HTML DTD"></a>HTML DTD</h4><h4 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h4><h4 id="解析算法"><a href="#解析算法" class="headerlink" title="解析算法"></a>解析算法</h4><h4 id="标记化算法"><a href="#标记化算法" class="headerlink" title="标记化算法"></a>标记化算法</h4><h4 id="构建树算法"><a href="#构建树算法" class="headerlink" title="构建树算法"></a>构建树算法</h4><h4 id="解析完成的动作"><a href="#解析完成的动作" class="headerlink" title="解析完成的动作"></a>解析完成的动作</h4><h4 id="浏览器容错"><a href="#浏览器容错" class="headerlink" title="浏览器容错"></a>浏览器容错</h4><h3 id="CSS解析"><a href="#CSS解析" class="headerlink" title="CSS解析"></a>CSS解析</h3><h4 id="Webkit的CSS解析器"><a href="#Webkit的CSS解析器" class="headerlink" title="Webkit的CSS解析器"></a>Webkit的CSS解析器</h4><h3 id="处理脚本和样式表的吮吸"><a href="#处理脚本和样式表的吮吸" class="headerlink" title="处理脚本和样式表的吮吸"></a>处理脚本和样式表的吮吸</h3><h4 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h4><h4 id="推测解析"><a href="#推测解析" class="headerlink" title="推测解析"></a>推测解析</h4><h4 id="样式表"><a href="#样式表" class="headerlink" title="样式表"></a>样式表</h4><h2 id="渲染树的构建"><a href="#渲染树的构建" class="headerlink" title="渲染树的构建"></a>渲染树的构建</h2><h3 id="渲染树和DOM树的关系"><a href="#渲染树和DOM树的关系" class="headerlink" title="渲染树和DOM树的关系"></a>渲染树和DOM树的关系</h3><h3 id="构建树的过程"><a href="#构建树的过程" class="headerlink" title="构建树的过程"></a>构建树的过程</h3><h3 id="样式计算"><a href="#样式计算" class="headerlink" title="样式计算"></a>样式计算</h3><h4 id="共享样式数据"><a href="#共享样式数据" class="headerlink" title="共享样式数据"></a>共享样式数据</h4><h4 id="Firefox规则树"><a href="#Firefox规则树" class="headerlink" title="Firefox规则树"></a>Firefox规则树</h4><h5 id="分割结构"><a href="#分割结构" class="headerlink" title="分割结构"></a>分割结构</h5><h5 id="使用规则树来计算样式"><a href="#使用规则树来计算样式" class="headerlink" title="使用规则树来计算样式"></a>使用规则树来计算样式</h5><h4 id="使用简单的规则来操作它的规则"><a href="#使用简单的规则来操作它的规则" class="headerlink" title="使用简单的规则来操作它的规则"></a>使用简单的规则来操作它的规则</h4><h4 id="以正确的级联顺序应用规则"><a href="#以正确的级联顺序应用规则" class="headerlink" title="以正确的级联顺序应用规则"></a>以正确的级联顺序应用规则</h4><h5 id="样式表级联顺序"><a href="#样式表级联顺序" class="headerlink" title="样式表级联顺序"></a>样式表级联顺序</h5><h5 id="特别之处"><a href="#特别之处" class="headerlink" title="特别之处"></a>特别之处</h5><h5 id="规则分类"><a href="#规则分类" class="headerlink" title="规则分类"></a>规则分类</h5><h4 id="渐进式过程"><a href="#渐进式过程" class="headerlink" title="渐进式过程"></a>渐进式过程</h4><h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><h3 id="脏位系统"><a href="#脏位系统" class="headerlink" title="脏位系统"></a>脏位系统</h3><h3 id="全局和增量布局"><a href="#全局和增量布局" class="headerlink" title="全局和增量布局"></a>全局和增量布局</h3><h3 id="异步和同步布局"><a href="#异步和同步布局" class="headerlink" title="异步和同步布局"></a>异步和同步布局</h3><h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><h3 id="布局进程"><a href="#布局进程" class="headerlink" title="布局进程"></a>布局进程</h3><h3 id="断行"><a href="#断行" class="headerlink" title="断行"></a>断行</h3><h2 id="绘制"><a href="#绘制" class="headerlink" title="绘制"></a>绘制</h2><h3 id="全局和增量"><a href="#全局和增量" class="headerlink" title="全局和增量"></a>全局和增量</h3><h3 id="绘制顺序"><a href="#绘制顺序" class="headerlink" title="绘制顺序"></a>绘制顺序</h3><h3 id="Firefox表现列表"><a href="#Firefox表现列表" class="headerlink" title="Firefox表现列表"></a>Firefox表现列表</h3><h3 id="WebKit矩形存储"><a href="#WebKit矩形存储" class="headerlink" title="WebKit矩形存储"></a>WebKit矩形存储</h3><h2 id="动态变化"><a href="#动态变化" class="headerlink" title="动态变化"></a>动态变化</h2><h2 id="绘制引擎进程"><a href="#绘制引擎进程" class="headerlink" title="绘制引擎进程"></a>绘制引擎进程</h2><h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><h2 id="css2视觉模型"><a href="#css2视觉模型" class="headerlink" title="css2视觉模型"></a>css2视觉模型</h2><h3 id="canvas"><a href="#canvas" class="headerlink" title="canvas"></a>canvas</h3><h3 id="CSS盒子模型"><a href="#CSS盒子模型" class="headerlink" title="CSS盒子模型"></a>CSS盒子模型</h3><h3 id="定位方案"><a href="#定位方案" class="headerlink" title="定位方案"></a>定位方案</h3><h3 id="盒子类型"><a href="#盒子类型" class="headerlink" title="盒子类型"></a>盒子类型</h3><h3 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h3><h4 id="相对定位"><a href="#相对定位" class="headerlink" title="相对定位"></a>相对定位</h4><h4 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h4><h4 id="绝对定位和固定定位"><a href="#绝对定位和固定定位" class="headerlink" title="绝对定位和固定定位"></a>绝对定位和固定定位</h4><h3 id="分层表示"><a href="#分层表示" class="headerlink" title="分层表示"></a>分层表示</h3><h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/24/浏览器工作原理/" data-id="cjdkda1wh0005viuq7fwei5b7" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/browser-javascript-html-css/">browser,javascript,html,css</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/29/HTML-CSS布局技巧/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          HTML布局小技巧
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/16/bootstrap-4-0-0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">webpack导入bootstrap&#39;</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser-javascript-html-css/">browser,javascript,html,css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6-module/">es6 module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp-js/">gulp.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css-echarts/">html,css,echarts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/newyear/">newyear</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs/">nodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/tags/browser-javascript-html-css/" style="font-size: 10px;">browser,javascript,html,css</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6-module/" style="font-size: 10px;">es6 module</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/gulp-js/" style="font-size: 10px;">gulp.js</a> <a href="/tags/html-css-echarts/" style="font-size: 10px;">html,css,echarts</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/newyear/" style="font-size: 10px;">newyear</a> <a href="/tags/nodeJs/" style="font-size: 10px;">nodeJs</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/12/newYear/">2018年计划</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/29/HTML-CSS布局技巧/">HTML布局小技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/24/浏览器工作原理/">浏览器工作原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/16/bootstrap-4-0-0/">webpack导入bootstrap&#39;</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/25/study/">近期学习摘要（持续更新中）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 neptune<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

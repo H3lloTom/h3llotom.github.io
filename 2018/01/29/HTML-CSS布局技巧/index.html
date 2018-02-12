@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>HTML布局小技巧 | neptune</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="HTML+CSS实现标题固定高度，剩余内容物填充整个容器这里用到的技巧为设置父元素的padding-top为标题高度，然后将标题设为浮动，position：absolute，这样可以很好地解决如下问题：  页面布局需要使内容物填满整个容器，而其中一个的高度不能设置百分比 echarts中经常会有标题+图标容器充满整个父元素的，这里就可以为图表容器设置宽高  话不多说，实践代码走起： 1234567">
+<meta name="keywords" content="html,css,echarts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML布局小技巧">
+<meta property="og:url" content="http://yoursite.com/2018/01/29/HTML-CSS布局技巧/index.html">
+<meta property="og:site_name" content="neptune">
+<meta property="og:description" content="HTML+CSS实现标题固定高度，剩余内容物填充整个容器这里用到的技巧为设置父元素的padding-top为标题高度，然后将标题设为浮动，position：absolute，这样可以很好地解决如下问题：  页面布局需要使内容物填满整个容器，而其中一个的高度不能设置百分比 echarts中经常会有标题+图标容器充满整个父元素的，这里就可以为图表容器设置宽高  话不多说，实践代码走起： 1234567">
+<meta property="og:image" content="http://yoursite.com/2018/01/29/HTML-CSS布局技巧/images/body.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/01/29/HTML-CSS布局技巧/images/header.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/01/29/HTML-CSS布局技巧/images/content.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/01/29/HTML-CSS布局技巧/images/header-none.jpg">
+<meta property="og:updated_time" content="2018-01-29T06:34:09.424Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML布局小技巧">
+<meta name="twitter:description" content="HTML+CSS实现标题固定高度，剩余内容物填充整个容器这里用到的技巧为设置父元素的padding-top为标题高度，然后将标题设为浮动，position：absolute，这样可以很好地解决如下问题：  页面布局需要使内容物填满整个容器，而其中一个的高度不能设置百分比 echarts中经常会有标题+图标容器充满整个父元素的，这里就可以为图表容器设置宽高  话不多说，实践代码走起： 1234567">
+<meta name="twitter:image" content="http://yoursite.com/2018/01/29/HTML-CSS布局技巧/images/body.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="neptune" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">neptune</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-HTML-CSS布局技巧" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/29/HTML-CSS布局技巧/" class="article-date">
+  <time datetime="2018-01-29T06:34:09.424Z" itemprop="datePublished">2018-01-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTML布局小技巧
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="HTML-CSS实现标题固定高度，剩余内容物填充整个容器"><a href="#HTML-CSS实现标题固定高度，剩余内容物填充整个容器" class="headerlink" title="HTML+CSS实现标题固定高度，剩余内容物填充整个容器"></a>HTML+CSS实现标题固定高度，剩余内容物填充整个容器</h2><p>这里用到的技巧为设置父元素的padding-top为标题高度，然后将标题设为浮动，position：absolute，这样可以很好地解决如下问题：</p>
+<ul>
+<li>页面布局需要使内容物填满整个容器，而其中一个的高度不能设置百分比</li>
+<li>echarts中经常会有标题+图标容器充满整个父元素的，这里就可以为图表容器设置宽高</li>
+</ul>
+<p>话不多说，实践代码走起：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;title&gt;test fluid <span class="attribute">content</span>&lt;/title&gt;</span><br><span class="line">	&lt;style type=<span class="string">"text/css"</span>&gt;</span><br><span class="line">		*&#123;</span><br><span class="line">			<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">			<span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="selector-tag">html</span>,body&#123;</span><br><span class="line">			<span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">			<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		body&#123;</span><br><span class="line">			<span class="attribute">position</span>: relative;</span><br><span class="line">			<span class="attribute">padding-top</span>: <span class="number">30px</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		.header&#123;</span><br><span class="line">			<span class="attribute">position</span>: absolute;</span><br><span class="line">			<span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">			<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">			<span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">background-color</span>: <span class="number">#ffaaaa</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		.<span class="attribute">content</span>&#123;</span><br><span class="line">			<span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">			<span class="attribute">background-color</span>: <span class="number">#ff0000</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;<span class="selector-tag">div</span> class=<span class="string">"header"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;<span class="selector-tag">div</span> class=<span class="string">"content"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>代码分解：</p>
+<blockquote>
+<p>页面分为（body（div.header）,（div.content））这样的结构<br>首先将body设置一个padding-top为30的上边距，然后设置为相对定位，<br>子元素.header为绝对定位，根据父元素body的top为0；<br>子元素.content高度为100%，这里用到一个box-sizing:border-box的特性:内边距是相对于内容物之外来计算的，因此它的100%，其实是body元素除去30px的上边距之后计算得到的值。</p>
+</blockquote>
+<p>来看一下效果吧！</p>
+<p><img src="./images/body.jpg" alt="enter description here" title="这是body的宽高"></p>
+<p><img src="./images/header.jpg" alt="enter description here" title="这是header的宽高"></p>
+<p><img src="./images/content.jpg" alt="enter description here" title="这是content的宽高"></p>
+<p>为了更加明显，我们将header隐藏掉：</p>
+<p><img src="./images/header-none.jpg" alt="enter description here" title="没有header的样式"></p>
+<p>可以看出来，其实header相当于是一层额外的纸贴在body上哦，而body也给它留出了30px的空白位置。</p>
+<p>这种布局主要依赖于box-sizing:border-box属性</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/29/HTML-CSS布局技巧/" data-id="cjdkda1w50000viuqpvedq7ds" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html-css-echarts/">html,css,echarts</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/02/12/newYear/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          2018年计划
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/24/浏览器工作原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">浏览器工作原理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser-javascript-html-css/">browser,javascript,html,css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6-module/">es6 module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp-js/">gulp.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css-echarts/">html,css,echarts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/newyear/">newyear</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs/">nodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-js/">vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/tags/browser-javascript-html-css/" style="font-size: 10px;">browser,javascript,html,css</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6-module/" style="font-size: 10px;">es6 module</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/gulp-js/" style="font-size: 10px;">gulp.js</a> <a href="/tags/html-css-echarts/" style="font-size: 10px;">html,css,echarts</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/newyear/" style="font-size: 10px;">newyear</a> <a href="/tags/nodeJs/" style="font-size: 10px;">nodeJs</a> <a href="/tags/vue-js/" style="font-size: 10px;">vue.js</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/12/newYear/">2018年计划</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/29/HTML-CSS布局技巧/">HTML布局小技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/24/浏览器工作原理/">浏览器工作原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/16/bootstrap-4-0-0/">webpack导入bootstrap&#39;</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/25/study/">近期学习摘要（持续更新中）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 neptune<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
