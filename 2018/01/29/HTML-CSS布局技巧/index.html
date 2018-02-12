@@ -14,6 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/29/HTML-CSS布局技巧/index.html">
 <meta property="og:site_name" content="neptune">
 <meta property="og:description" content="HTML+CSS实现标题固定高度，剩余内容物填充整个容器这里用到的技巧为设置父元素的padding-top为标题高度，然后将标题设为浮动，position：absolute，这样可以很好地解决如下问题：  页面布局需要使内容物填满整个容器，而其中一个的高度不能设置百分比 echarts中经常会有标题+图标容器充满整个父元素的，这里就可以为图表容器设置宽高  话不多说，实践代码走起： 1234567">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/01/29/HTML-CSS布局技巧/images/body.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/01/29/HTML-CSS布局技巧/images/header.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/01/29/HTML-CSS布局技巧/images/content.jpg">
@@ -45,6 +46,10 @@
       <h1 id="logo-wrap">
         <a href="/" id="logo">neptune</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">a free style</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
